@@ -71,6 +71,51 @@ class ProdutoService {
         }
     }
 
+    public function remover($id, $dados) {
+        try {
+            // Busca o produto
+            $produto = Produto::findOrFail($id);
+
+            // Valida se existe a quantia solicitada em estoque
+            if($dados['quantidade'] > $produto->quantidade_atual) {
+                // Retorna mensagem de falha caso quantia de estoque indisponível e status code 200 OK
+                return [
+                    'code' => 200,
+                    'message' => 'Quantidade de produtos indisponível para baixa'
+                ];
+            }
+
+            // Decrementa a quantia parametrizada do estoque
+            $dados['quantidade_atual'] = $produto->quantidade_atual - $dados['quantidade'];
+
+            // Dados movimento
+            $movimento = new ProdutoMovimento();
+            $movimento->sku = $produto->sku;
+            $movimento->quantidade = $dados['quantidade'];
+            $movimento->tipo = 'remoção';
+
+            // Transaction para certificar que os dois campos salvam juntos ou nenhum salva
+            \DB::transaction(function () use ($produto, $dados, $movimento) {
+                // Persistência produto
+                $produto->update($dados);
+                // Persistência movimento
+                $movimento->save();
+            });
+
+            // Retorna status code 200 OK
+            return [
+                'code' => 200,
+                'message' => 'Baixa do estoque realizada com sucesso'
+            ];
+        } catch (\Exception $e) {
+            // Retorna status code 500 Internal server error
+            return [
+                'code' => 500,
+                'message' => 'Ocorreu um erro ao tentar efetuar a baixa do estoque do produto'
+            ];
+        }
+    }
+
     public function historico() {
         try {
             // Retorna movimento dos produtos ordenados por data descrescente

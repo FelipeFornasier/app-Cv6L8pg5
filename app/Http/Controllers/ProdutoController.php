@@ -61,6 +61,25 @@ class ProdutoController extends Controller {
     }
 
     /**
+     * Remove estoque
+     *
+     * Faz a baixa de uma quantia do estoque de um produto e gera seu histórico de movimentação
+     * Caso não haja a quantia o suficiente para baixa, retorna mensagem informativa
+     *
+     * @param   sku             string      Identificador, logística de armazém. ex: CEL-S-S8-P-128
+     * @param   quantidade      int         Quantidade a ser removida ao estoque do produto
+     */
+    public function remover(Request $request, $id) {
+        //Validação de campos
+        $this->validate($request, [
+            'quantidade'    =>  'required'
+        ]);
+
+        $retorno = $this->service->remover($id, $request->all());
+        return response()->json($retorno);
+    }
+
+    /**
      * Histórico
      *
      * Retorna histórico de movimentações do estoque dos produtos
