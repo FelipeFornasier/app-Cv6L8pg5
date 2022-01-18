@@ -1,4 +1,4 @@
-## Desafio Técnico Full-stack
+# Desafio Técnico Full-stack
 
 Processo seletivo - candidato Felipe Fornasier
 
@@ -18,9 +18,9 @@ Laravel 6.2
 
 MySQL 5.7
 
-## Instalação
+# Instalação
 
-# Configuração inicial
+## Configuração inicial
 
 composer install
 
@@ -30,16 +30,16 @@ php artisan key:generate
 
 Criar virtual host apontando para pasta public
 
-# Create database
+## Create database
 
 Name: appmax
 
 Collation: utf8_general_ci
 
-# Gerar tabelas
+## Gerar tabelas
 
 php artisan migrate
 
-# Arquivo auxiliar para testes
+## Arquivo auxiliar para testes
 
 Foi criado um Postman collection para auxiliar no testes da API. Está localizado no caminho storage/appmax.postman_collection.json 
