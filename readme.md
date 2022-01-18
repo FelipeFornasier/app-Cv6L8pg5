@@ -39,3 +39,7 @@ Collation: utf8_general_ci
 # Gerar tabelas
 
 php artisan migrate
+
+# Arquivo auxiliar para testes
+
+Foi criado um Postman collection para auxiliar no testes da API. Está localizado no caminho storage/appmax.postman_collection.json 
