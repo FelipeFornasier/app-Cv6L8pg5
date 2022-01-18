@@ -1,0 +1,82 @@
+{
+	"variables": [],
+	"info": {
+		"name": "appmax",
+		"_postman_id": "ad33370e-25d6-2e93-5bde-5981963b8e97",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Historico",
+			"request": {
+				"url": "http://www.appmaxtest.com/produto/historico",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Criar",
+			"request": {
+				"url": "http://www.appmaxtest.com/produto/criar",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sku\": \"CEL-S-S8-P-128\",\n\t\"nome\": \"Samsung Galaxy S8 Preto\",\n\t\"quantidade_inicial\": 10\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar",
+			"request": {
+				"url": "http://www.appmaxtest.com/produto/adicionar/CEL-S-S8-P-128",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quantidade\": 5\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Remover",
+			"request": {
+				"url": "http://www.appmaxtest.com/produto/remover/CEL-S-S8-P-128",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quantidade\": 15\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
