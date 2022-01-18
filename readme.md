@@ -1,6 +1,6 @@
 ## Desafio Técnico Full-stack
 
-Processo seletivo Felipe Fornasier
+Processo seletivo - candidato Felipe Fornasier
 
 ## Funcionalidades da API
 
@@ -13,5 +13,29 @@ Histórico
 ## Tecnologias utilizadas
 
 PHP 7.3
+
 Laravel 6.2
+
 MySQL 5.7
+
+## Instalação
+
+# Configuração inicial
+
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+
+Criar virtual host apontando para pasta public
+
+# Create database
+
+Name: appmax
+
+Collation: utf8_general_ci
+
+# Gerar tabelas
+
+php artisan migrate
