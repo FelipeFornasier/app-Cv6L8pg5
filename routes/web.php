@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test', function () {
-    return view('welcome');
+
+Route::prefix('produto')->group(function () {
+    Route::put('criar', 'ProdutoController@criar');
+    Route::put('adicionar/{id}', 'ProdutoController@adicionar');
+    Route::put('remover/{id}', 'ProdutoController@remover');
+    Route::get('historico', 'ProdutoController@historico');
 });
