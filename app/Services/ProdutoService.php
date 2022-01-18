@@ -34,6 +34,42 @@ class ProdutoService {
             ];
         }
     }
+    
+    public function adicionar($id, $dados) {
+        try {
+            // Busca o produto
+            $produto = Produto::findOrFail($id);
+
+            // Adiciona os produtos na quantidade atual
+            $dados['quantidade_atual'] = $produto->quantidade_atual + $dados['quantidade'];
+
+            // Dados movimento
+            $movimento = new ProdutoMovimento();
+            $movimento->sku = $produto->sku;
+            $movimento->quantidade = $dados['quantidade'];
+            $movimento->tipo = 'adição';
+
+            // Transaction para certificar que os dois campos salvam juntos ou nenhum salva
+            \DB::transaction(function () use ($produto, $dados, $movimento) {
+                // Persistência produto
+                $produto->update($dados);
+                // Persistência movimento
+                $movimento->save();
+            });
+
+            // Retorna status code 200 OK
+            return [
+                'code' => 200,
+                'message' => 'Reposição de estoque do produto realizada com sucesso!'
+            ];
+        } catch (\Exception $e) {
+            // Retorna status code 500 Internal server error
+            return [
+                'code' => 500,
+                'message' => 'Ocorreu um erro ao tentar efetuar a reposição de estoque do produto.'
+            ];
+        }
+    }
 
     public function historico() {
         try {

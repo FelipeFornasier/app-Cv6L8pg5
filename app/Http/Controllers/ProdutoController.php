@@ -43,6 +43,24 @@ class ProdutoController extends Controller {
     }
 
     /**
+     * Adicionar estoque
+     *
+     * Adiciona estoque ao um produto e gera seu histórico de movimentação
+     *
+     * @param   sku             string      Identificador, logística de armazém. ex: CEL-S-S8-P-128
+     * @param   quantidade      int         Quantidade a ser adicionada ao estoque do produto
+     */
+    public function adicionar(Request $request, $id) {
+        // Validação dos campos
+        $this->validate($request, [
+            'quantidade'    =>  'required'
+        ]);
+
+        $retorno = $this->service->adicionar($id, $request->all());
+        return response()->json($retorno);
+    }
+
+    /**
      * Histórico
      *
      * Retorna histórico de movimentações do estoque dos produtos
